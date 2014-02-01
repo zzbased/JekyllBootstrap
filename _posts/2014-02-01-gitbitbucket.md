@@ -1,6 +1,16 @@
+---
+layout: post
+title: "git+bitbucket"
+description: ""
+category: 
+tags: []
+---
+{% include JB/setup %}
+
 ##git + bitbucket 配置##
 
-bitbuckte 相比于时下最流行的 github, 其最牛之处在于可以免费创建私人项目。这点相当吸引人。我打算把一些杂乱的项目放上去，一方面为个备份，另一方面也为跟踪开发过程。
+bitbuckte 相比于时下最流行的 github, 其最牛之处在于可以免费创建私人项目。这点相当吸引人。我打算把一些杂乱的项目放
+上去，一方面为个备份，另一方面也为跟踪开发过程。
 
 mac电脑上默认有安装git, 需要做的只是一些简单的配置。
 

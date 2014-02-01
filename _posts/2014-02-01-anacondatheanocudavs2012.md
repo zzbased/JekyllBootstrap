@@ -1,3 +1,11 @@
+---
+layout: post
+title: "anaconda+theano+cuda+vs2012编程环境搭建"
+description: ""
+category: 
+tags: []
+---
+{% include JB/setup %}
 ## anaconda+theano+cuda+vs2012编程环境搭建 ##
 
 ### 一 基本概念介绍 ###
