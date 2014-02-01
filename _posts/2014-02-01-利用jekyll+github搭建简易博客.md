@@ -11,7 +11,7 @@ tags: [blog]
 
 ### 准备工作 ###
 1. Github工作目录
-搭建Github工作目录，需要先把ssh通道建立好，参看下面两篇文章。[产生ssh keys](https://help.github.com/articles/generating-ssh-keys)，[可能碰到的问题](https://help.github.com/articles/error-permission-denied-publickey)
+搭建Github工作目录，需要先把ssh通道建立好，参看下面两篇文章。[产生ssh keys](https://help.github.com/articles/generating-ssh-keys)    [可能碰到的问题](https://help.github.com/articles/error-permission-denied-publickey)
 
 2. markdown编辑器
 在macbook上，我使用的编辑器是lightpaper. 引用图像存储链接服务是 [droplr](droplr.com)
@@ -24,7 +24,7 @@ tags: [blog]
 	可以更改为https地址:
 	git remote set-url origin https://github.com/zzbased/zzbased.github.com.git
 	
-3. 安装好jekyll后，就可以本地调试。我们首先修改index.md，可以在原基础上做修改即可。
+3. 安装好jekyll后，就可以本地调试。我们利用index.md，可以在原基础上做修改即可。
 
 4. 然后在_post文件夹里，删除原来的example。利用rake post title="xxx"新增一个md文件。接下来就开始编辑了。
 
