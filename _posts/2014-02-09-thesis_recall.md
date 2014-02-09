@@ -21,6 +21,12 @@ Types of Machine Learning Algorithms; Taiwo Oladipupo Ayodele
 计算完cost function: f和gradient function: df, 输入到lbfgs即可。
 余凯：说hinge loss, 当年主要卖点是得到稀疏解，也即所谓支撑向量 (SV). 今天看来，这个性质已不重要：1 这是一个特殊凸优化算法的结果，而非统计学习的本质问题； 2 实践中，当年kernel系统得到稀疏解带来计算上的便捷，但现在我们已不用kernel; 3 甚至稀疏性这个结论已被推翻，已证明SV是线性增长。
 
+[owl-qn](http://research.microsoft.com/en-us/downloads/b1eb1016-1738-4bd5-83a9-370c9d498a03/)  lbfgs+L1正则化。到目前为止，简单的lr用的还是这个库。
+
+[逻辑回归-从入门到精通](https://github.com/zzbased/zzbased.github.com/blob/master/_posts/doc/LR逻辑回归-从入门到精通.pdf)  这是目前看到对逻辑回归讲得最好的文章。
+
+一些有趣的机器学习库 [vowpal_wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki)  [c++ library](http://blog.sina.com.cn/s/blog_569d6df801014x4x.html#bsh-24-170411859)  [scikit](http://scikit-learn.org/stable/)
+
 ### classification ###
 Supervised Machine Learning: A Review of Classification Techniques; S. B. Kotsiantis 
 
@@ -55,7 +61,7 @@ The Boosting Approach to Machine Learning An Overview; Robert E. Schapire
 
 ### sas ###
 A Web-based Kernel Function for Measuring the Similarity
-of Short Text Snippets; Mehran Sahami , Timothy D. Heilman。
+of Short Text Snippets; Mehran Sahami , Timothy D. Heilman。搜索广告sas的参考文献。
 
 
 ###deep learning###
@@ -63,11 +69,12 @@ of Short Text Snippets; Mehran Sahami , Timothy D. Heilman。
 
 [Deep Learning（深度学习）学习笔记整理系列](http://blog.csdn.net/zouxy09/article/details/8775360)
 
-Learning Deep Architectures for AI; Yoshua Bengio
+Learning Deep Architectures for AI; Yoshua Bengio。综述文章。
 
-Deep Learning for NLP(without Magic)	; Richard Socher, Yoshua bengio
+Deep Learning for NLP(without Magic)	; Richard Socher, Yoshua bengio。nlp综述文章。
 
-Representation Learning: A Review and New Perspectives; Yoshua Bengio  
+Representation Learning: A Review and New Perspectives; Yoshua Bengio。综述文章。
+  
 Hierarchical Convolutional Deep Learning in Computer Vision; Matthew D. Zeiler。zeiler是imagenet 2013 image classification的第一名，这是他的博士论文，挺有阅读价值的。
 
 ### recommender ###
@@ -82,7 +89,7 @@ Online Learning and Online Convex Optimization; By Shai Shalev-Shwartz
 
 
 ### DSP ###
-DSP中的算法初探; 江申 @ 力美移动广告 
+DSP中的算法初探; 江申
 
 实时定向广告技术-DSP框架及算法;则成
 
