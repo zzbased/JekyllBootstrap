@@ -96,3 +96,11 @@ DSP中的算法初探; 江申
 
 ### ctr ###
 Ad Click Prediction: a View from the Trenches;H. Brendan McMahan
+
+
+---
+
+add on 20140214
+
+[statistical machine learning for nlp; by xiaojin zhu](http://pages.cs.wisc.edu/~jerryzhu/pub/ZhuCCFADL46.pdf)
+
