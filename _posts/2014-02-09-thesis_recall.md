@@ -24,6 +24,7 @@ Types of Machine Learning Algorithms; Taiwo Oladipupo Ayodele
 [owl-qn](http://research.microsoft.com/en-us/downloads/b1eb1016-1738-4bd5-83a9-370c9d498a03/)  lbfgs+L1正则化。到目前为止，简单的lr用的还是这个库。
 
 [逻辑回归-从入门到精通](https://github.com/zzbased/zzbased.github.com/blob/master/_posts/doc/LR逻辑回归-从入门到精通.pdf)  这是目前看到对逻辑回归讲得最好的文章。
+这是另一篇[文章](http://www.csdn.net/article/2014-02-13/2818400-2014-02-13)，主要讲述怎么并行化逻辑回归。
 
 一些有趣的机器学习库 [vowpal_wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki)  [c++ library](http://blog.sina.com.cn/s/blog_569d6df801014x4x.html#bsh-24-170411859)  [scikit](http://scikit-learn.org/stable/)
 
