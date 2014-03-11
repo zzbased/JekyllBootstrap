@@ -100,26 +100,27 @@ PYTHONPATH的含义和sys.path一样，就是python解释器寻找模块的路�
 
 
 在使用theano之前，还需要配置theano。
-   在home目录下编辑.theanorc.txt
-
-    [blas]
-    ldflags =
-    [gcc]
-    cxxflags = -ID:\Anaconda\MinGW
-    [nvcc]
-    fastmath = True
-    flags=-LD:\Anaconda\libs
-    compiler-bindir=C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin
-    base_compiledir=path_to_a_directory_without_such_characters
-    [global]
-    floatX = float32
-    device = gpu
+   在home目录[打开cmd时所显示的目录]下编辑.theanorc.txt。
+	
+	[blas]
+	ldflags =
+	[gcc]
+	cxxflags = -ID:\Anaconda\MinGW
+	[nvcc]
+	fastmath = True
+	flags=-LD:\Anaconda\libs
+	compiler-bindir=C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin
+	base_compiledir=path_to_a_directory_without_such_characters
+	[global]
+	floatX = float32
+	device = gpu
 
 ### 三. 使用theano ###
 #### 3.1 theano using the GPU ####
 [官方using the gpu文档](http://deeplearning.net/software/theano/tutorial/using_gpu.html#using-gpu)
 
 下面是一个测试程序：
+
     from theano import function, config, shared, sandbox
     import theano.tensor as T
     import numpy
