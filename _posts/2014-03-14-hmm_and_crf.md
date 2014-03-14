@@ -1,4 +1,13 @@
-#HMM与CRF
+---
+layout: post
+title: "HMM and CRF"
+description: ""
+category: 
+tags: [machine learning]
+---
+{% include JB/setup %}
+
+##HMM与CRF
 
 
 看到语音识别的时候，觉得是该找个机会把HMM与CRF相关的知识点做一个总结了。
