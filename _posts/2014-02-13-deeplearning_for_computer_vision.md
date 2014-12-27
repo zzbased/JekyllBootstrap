@@ -15,6 +15,7 @@ tags: [machine learning, deep learning]
 **deep learning for computer vision,
 nips 2013 tutorial,
 rob fergus**
+[slidelink](http://cs.nyu.edu/~fergus/presentations/nips2013_final.pdf)
 
 - existing recognition approach. page4. **need **
 features are hand-designed.

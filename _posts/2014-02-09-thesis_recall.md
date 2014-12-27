@@ -25,6 +25,7 @@ Types of Machine Learning Algorithms; Taiwo Oladipupo Ayodele
 
 [逻辑回归-从入门到精通](https://github.com/zzbased/zzbased.github.com/blob/master/_posts/doc/LR逻辑回归-从入门到精通.pdf)  这是目前看到对逻辑回归讲得最好的文章。
 这是另一篇[文章](http://www.csdn.net/article/2014-02-13/2818400-2014-02-13)，主要讲述怎么并行化逻辑回归。
+
 ![lr parallel](https://raw.github.com/zzbased/zzbased.github.com/master/_posts/images/lr_parallel.png)
 
 一些有趣的机器学习库 [vowpal_wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki)  [c++ library](http://blog.sina.com.cn/s/blog_569d6df801014x4x.html#bsh-24-170411859)  [scikit](http://scikit-learn.org/stable/)
