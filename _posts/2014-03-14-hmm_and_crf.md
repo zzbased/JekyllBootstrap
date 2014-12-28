@@ -24,10 +24,10 @@ tags: [machine learning]
 ---------
 
 再看两张图：
-![crf_hmm1](./images/crf_hmm1.png)
+![crf_hmm1](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/crf_hmm1.png)
 
 
-![crf_hmm2](./images/crf_hmm2.png)
+![crf_hmm2](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/crf_hmm2.png)
 
 ---------
 
