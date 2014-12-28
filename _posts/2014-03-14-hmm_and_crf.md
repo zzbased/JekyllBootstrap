@@ -24,8 +24,15 @@ tags: [machine learning]
 ---------
 
 再看两张图：
-![crf_hmm1](https://raw.github.com/zzbased/zzbased.github.com/master/_posts/images/crf_hmm1.png)
+![crf_hmm1](./images/crf_hmm1.png)
+
+
+![crf_hmm2](./images/crf_hmm2.png)
 
 ---------
 
-![crf_hmm2](https://raw.github.com/zzbased/zzbased.github.com/master/_posts/images/crf_hmm2.png)
+关于hmm,mcmm,crf下面要做一个好好的总结；
+[隐马尔可夫模型 最大熵马尔可夫模型 条件随机场 区别和联系](http://1.guzili.sinaapp.com/?p=133#comment-151)
+
+[52nlp hmm](http://www.52nlp.cn/tag/hmm)
+

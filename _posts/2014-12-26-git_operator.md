@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "git+bitbucket"
+title: "git相关操作指南"
 description: ""
 category: 
 tags: []
