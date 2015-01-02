@@ -7,17 +7,21 @@ tags: []
 ---
 {% include JB/setup %}
 
-### 矩阵相似度计算
+## 矩阵相似度计算
 
 - 在机器学习任务中，矩阵是一个很重要的表述形式。文档与词，用户与其购买的商品，用户与好友关系等都可以描述成一个矩阵。为了描述方便，下文中矩阵都以U\*I代替，U代表user，I代表item，矩阵维数为m\*n。
 对这个矩阵，一个最基础的任务就是找到最相似的用户或最相似的文档，也就是[k最近邻问题](http://zh.wikipedia.org/wiki/%E6%9C%80%E8%BF%91%E9%84%B0%E5%B1%85%E6%B3%95)(数据挖掘十大经典算法之一)。
 
+#### 相似度计算方法
 - 相似度计算方法：cosine距离，jaccard距离，bm25模型，proximity模型。具体请参考[机器学习中的相似性度量](http://www.cnblogs.com/heaad/archive/2011/03/08/1977733.html)
 
+
+#### 降维方法
 - 计算任意两个user之间的相似度，需要O(m*n)的复杂度。当n很大的时候，首先想到的办法是能否降维，将原矩阵变为m\*k维(k<<n)。
 
 - 降维的方法有：svd，nmf，lsa，lda等。将一个大矩阵分解为两个小矩阵(m\*n分解为两个矩阵m\*k，k\*n)，或者分解为三个小矩阵(m\*n分解为两个矩阵m\*k，k\*k，k\*n)
 
+#### minhash+lsh
 - 除此之外，还有一种降维+局部敏感hash的算法。
 也就是minhash + lsh。参考[MinHash wiki](http://en.wikipedia.org/wiki/MinHash)，[文本去重之MinHash算法](http://blog.csdn.net/sunlylorn/article/details/7835411)，[利用Minhash和LSH寻找相似的集合](http://www.cnblogs.com/bourneli/archive/2013/04/04/2999767.html)
 
@@ -39,9 +43,7 @@ tags: []
 	- LSH:local sensitive hash。将上面K维向量划分到n个桶，每个桶有K/n维。两个user，只要有一个桶的元素是一样的，那么就认为他们是相似候选。这里有一个公式来衡量n的选值。请参考论文[find similar items](http://infolab.stanford.edu/~ullman/mmds/ch3.pdf)，[局部敏感哈希LSH科普](http://1.guzili.sinaapp.com/?p=190#more-190)
 
 	![lsh](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/lsh.png)
-
-	![]
-
+#### 直接利用map-reduce
 - 另外一种方法是不降维，直接通过map-reduce直接计算user之间的相似性。
 	- 假设矩阵U\*I，计算两两U之间的相关性，时间复杂度是O(N^3)
 	- 但是我们可以换个思路，将矩阵转置，以item为key。第一轮map-reduce过程，将U\*I矩阵转置为I\*U矩阵，输出每个item下，与该item有关联的所有user list。第二轮map，将同一个item下user两两组合成pair后输出，第二轮reduce，累加相同user pair的weight，得到任意两个user之间的相似度。
@@ -49,7 +51,7 @@ tags: []
 	- 文中后面还讲了一些优化手段。
 
 	![matrix_similairity](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/matrix_similairity.png)
-
+####矩阵的乘法
 - 额外再讲一点内容，矩阵的乘法,一个m\*k的矩阵A乘上一个k\*n的矩阵B，结果是一个m\*n的矩阵C。有两种分解方法：
 	- 其一，把A矩阵按行分，把B矩阵按列分的观点来看矩阵乘法。C矩阵的一个子矩阵块可以看做是A对应多行和B对应多列的矩阵相乘得到的结果；
 	- 其二，把矩阵A按列分块，矩阵B按行分块，A乘B可以等价于A的分块子矩阵乘上B中对应的分块子矩阵的加和。最特殊的情况是把A按列分为k个列向量，B按行分为k个行向量，然后对应的列向量于行向量相乘，得到k个矩阵，他们的和就是A和B的乘积。
