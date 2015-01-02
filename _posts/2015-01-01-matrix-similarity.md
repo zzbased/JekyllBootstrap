@@ -43,6 +43,7 @@ tags: []
 	- LSH:local sensitive hash。将上面K维向量划分到n个桶，每个桶有K/n维。两个user，只要有一个桶的元素是一样的，那么就认为他们是相似候选。这里有一个公式来衡量n的选值。请参考论文[find similar items](http://infolab.stanford.edu/~ullman/mmds/ch3.pdf)，[局部敏感哈希LSH科普](http://1.guzili.sinaapp.com/?p=190#more-190)
 
 	![lsh](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/lsh.png)
+
 #### 直接利用map-reduce
 - 另外一种方法是不降维，直接通过map-reduce直接计算user之间的相似性。
 	- 假设矩阵U\*I，计算两两U之间的相关性，时间复杂度是O(N^3)
@@ -51,6 +52,7 @@ tags: []
 	- 文中后面还讲了一些优化手段。
 
 	![matrix_similairity](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/matrix_similairity.png)
+
 ####矩阵的乘法
 - 额外再讲一点内容，矩阵的乘法,一个m\*k的矩阵A乘上一个k\*n的矩阵B，结果是一个m\*n的矩阵C。有两种分解方法：
 	- 其一，把A矩阵按行分，把B矩阵按列分的观点来看矩阵乘法。C矩阵的一个子矩阵块可以看做是A对应多行和B对应多列的矩阵相乘得到的结果；

@@ -10,8 +10,25 @@ tags: [machine learning, topic model]
 ## topic model 思考
 topic model通常指的是lda, plsa等模型，但从广义上将，类目也是一种topic。本文主要把以前接触到的plsa, lda等知识回顾一下，顺便把类目型的topic model也做一个总结。
 
-#### topic model分类
+### 常见topic model
 
+plsa
+
+LDA:
+采样算法：collapsed gibbs sampler，SparseLDA，[AliasLDA](http://www.sravi.org/pubs/fastlda-kdd2014.pdf)，Metropolis-Hastings sampler
+[gibbs sampling for the uninitiated](www.umiacs.umd.edu/~resnik/pubs/LAMP-TR-153.pdf)
+
+data-parallelism(splitting documents over machines) versus model-parallelism (splitting the word-topic distributions over machines).
+
+data-parallelism:YahooLDA, Scaling distributed machine learning with the parameter server
+	
+model-parallelism:PLDA+, peacock
+
+lightLDA:LightLDA adopts a different data-and-model-parallel strategy to maximize memory and CPU efficiency: we slice the word-topic distributions (the LDA model) in a structure-aware modelparallel manner [9, 24], and we fix blocks of documents to workers while transferring needed model parameters to them via a bounded-asynchronous data-parallel scheme [8]. 
+
+Metropolis-Hastings sampler
+
+**接下去的重点就是把最新的采样算法和怎么样做并行化好好研究一下，并写成文章**
 
 ### topic model on twitter 阅读笔记
 - 这篇论文其实和前段时间做过的广告分类有些相似，区别在于难度要大一些，考虑的点要更丰富一些。文中提到的很多点我以前都或多或少实践过，接触过，不过没有这么系统的总结出来，所以把这篇论文细细研读一遍，对自己的知识回顾与整理也是有帮助的。
@@ -34,5 +51,4 @@ co-learning and pu-learning
 - relation regularization
 - model calibration
 - quality evaluation
-- 
 
