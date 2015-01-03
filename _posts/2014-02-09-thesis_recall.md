@@ -81,7 +81,7 @@ Representation Learning: A Review and New Perspectives; Yoshua Bengio。综述�
 Hierarchical Convolutional Deep Learning in Computer Vision; Matthew D. Zeiler。zeiler是imagenet 2013 image classification的第一名，这是他的博士论文，挺有阅读价值的。
 
 ### recommender ###
-
+[本站文章](http://zzbased.github.io/2015/01/03/recommendation_algorithms/)
 
 ###Online learning###
 Online Learning and Online Convex Optimization; By Shai Shalev-Shwartz
