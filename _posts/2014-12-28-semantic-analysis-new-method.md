@@ -49,3 +49,5 @@ ensemble的方法有很多，线性ensemble，指数ensemble。
 - [zero-shot leanring by convex combination of semantic embeddings]()
 - [distributed representations of sentences and documents]()
 
+- [sequence to sequence learning with neural network]()
+- [exploting similarities among language for machine translation]()
