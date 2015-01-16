@@ -31,7 +31,7 @@ tags: []
 
 ### 有约束最优化
 
-一般采用拉格朗日方程，kkt，对偶问题求解。
+一般采用拉格朗日方程，kkt，对偶问题求解。[关于拉格朗日乘子法与KKT条件](http://www.moozhi.com/topic/show/54a8a261c555c08b3d59d996)
 
 譬如svm里，最大化几何间隔 max y(wx+b)/||w||
 
