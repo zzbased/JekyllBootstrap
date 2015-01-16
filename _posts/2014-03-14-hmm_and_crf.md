@@ -75,9 +75,9 @@ $$P(O|\lambda)=\sum_I P(O|I,\lambda)P(I|\lambda)$$
 而观测系列的生成，与LDA的生成过程类似。
 
 ### 条件随机域，CRF
-[CRF++学习](http://blog.csdn.net/gududanxing/article/details/10827085)
-[三种CRF实现在中文分词任务上的表现比较](https://jianqiangma.wordpress.com/2011/11/14/%E4%B8%89%E7%A7%8Dcrf%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%AE%80%E5%8D%95%E6%AF%94%E8%BE%83/)
-[CRF++ library](http://crfpp.googlecode.com/svn/trunk/doc/index.html?source=navbar)
+- [CRF++学习](http://blog.csdn.net/gududanxing/article/details/10827085)
+- [三种CRF实现在中文分词任务上的表现比较](https://jianqiangma.wordpress.com/2011/11/14/%E4%B8%89%E7%A7%8Dcrf%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%AE%80%E5%8D%95%E6%AF%94%E8%BE%83/)
+- [CRF++ library](http://crfpp.googlecode.com/svn/trunk/doc/index.html?source=navbar)
 
 ### 对比
 ![hmm1](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/hmm1.png)
