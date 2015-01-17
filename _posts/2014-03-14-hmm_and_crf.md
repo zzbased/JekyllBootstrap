@@ -18,7 +18,7 @@ tags: [machine learning]
 
 ### 推荐文章
 
-首先推荐两篇文章：
+首先推荐几篇文章：
 
 [classical probabilistic model and conditional random field](http://www.scai.fraunhofer.de/fileadmin/images/bio/data_mining/paper/crf_klinger_tomanek.pdf)
 
@@ -28,6 +28,8 @@ tags: [machine learning]
 
 [52nlp hmm](http://www.52nlp.cn/tag/hmm)
 
+[浅谈中文分词](http://www.isnowfy.com/introduction-to-chinese-segmentation/)
+ 
 ### 模型之间的联系
 从下面两张图看各个模型之间的联系：
 
@@ -89,6 +91,6 @@ $$P(O|\lambda)=\sum_I P(O|I,\lambda)P(I|\lambda)$$
 上图是CRF的概率图，属判别模型。以P(Y|X)建模。
 
 ### 参考文献
-[LaTeX/数学公式](http://zh.wikibooks.org/zh-cn/LaTeX/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F)
-
-[LaTeX数学公式输入初级](http://blog.sina.com.cn/s/blog_5e16f1770100fs38.html)
+- [Markdown中插入数学公式的方法](http://blog.csdn.net/xiahouzuoxin/article/details/26478179)
+- [LaTeX/数学公式](http://zh.wikibooks.org/zh-cn/LaTeX/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F)
+- [LaTeX数学公式输入初级](http://blog.sina.com.cn/s/blog_5e16f1770100fs38.html)
