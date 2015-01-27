@@ -21,6 +21,8 @@ tags: []
 
 [无约束最优化](http://www.52nlp.cn/unconstrained-optimization-one)
 
+[机器学习中导数最优化方法](http://www.cnblogs.com/daniel-D/p/3377840.html)
+
 #### 梯度下降法
 
 #### 牛顿法
