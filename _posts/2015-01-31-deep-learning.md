@@ -9,7 +9,7 @@ tags: []
 
 ## deep learning的坑
 
-转自：http://www.zhihu.com/question/27608272/answer/37318565
+转自：[知乎问答](http://www.zhihu.com/question/27608272/answer/37318565)
 
 要说深度学习还有什么坑，就要看看目前的深度学习都从哪些方面去研究。个人觉得当前深度学习领域的学术研究可以包含四部分：优化（Optimization），泛化（Generalization），表达（Representation）以及应用（Applications）。除了应用（Applications）之外每个部分又可以分成实践和理论两个方面。
 

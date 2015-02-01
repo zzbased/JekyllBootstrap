@@ -41,5 +41,15 @@ tags: []
 
 首先写出cost function：min [ 1/2*w^2 + max(0, 1 - y(wx+b) ) ]
 
-可以看出，这是一个有约束的问题，那么
+可以看出，这是一个有约束的问题，那么就可以用到"拉普拉斯+KKT+对偶"来求解了。
 
+
+## Loss Function
+
+[loss.pdf](http://web.mit.edu/lrosasco/www/publications/loss.pdf)
+
+[vowpal_wabbit Loss-functions ](https://github.com/JohnLangford/vowpal_wabbit/wiki/Loss-functions)
+
+[Loss function wiki](http://en.wikipedia.org/wiki/Loss_function)
+
+[shark loss function](http://image.diku.dk/shark/sphinx_pages/build/html/rest_sources/tutorials/concepts/library_design/losses.html)
