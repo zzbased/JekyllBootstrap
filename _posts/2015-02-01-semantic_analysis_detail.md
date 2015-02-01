@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "semantic_analysis_detail"
+title: "语义分析的一些方法"
 description: ""
 category: 
 tags: [machine learning, nlp]
 ---
 {% include JB/setup %}
 
-uthor: vincentyao@tencent.com
+author: vincentyao@tencent.com
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
@@ -30,7 +30,7 @@ uthor: vincentyao@tencent.com
 
 - 全切分方法。它首先切分出与词库匹配的所有可能的词，再运用统计语言模型决定最优的切分结果。它的优点在于可以解决分词中的歧义问题。下图是一个示例，对于文本串"南京市长江大桥"，首先进行词条检索(一般用Trie存储)，找到匹配的所有词条（南京，市，长江，大桥，南京市，长江大桥，市长，江大桥，江大，桥），以词网格(word lattices)形式表示，接着做路径搜索，基于统计语言模型(例如n-gram)[18]找到最优路径，最后可能还需要命名实体识别。下图中"南京市 长江 大桥"的语言模型得分，即P(南京市，长江，大桥)最高，则为最优切分。
  
-	![](./rnnlm1.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/rnnlm1.png)
 
 	图1. "南京市长江大桥"语言模型得分
 
@@ -40,7 +40,7 @@ uthor: vincentyao@tencent.com
   
 	除了HMM，CRF等模型，分词也可以基于深度学习方法来做，如文献[9][10]所介绍，也取得了state-of-the-art的结果。
 
-	![](./word_segmentation.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/word_segmentation.png)
 	
 	图2. 基于深度学习的中文分词
 
@@ -61,13 +61,13 @@ N-Gram语言模型简单有效，但是它只考虑了词的位置关系，没�
 
 最近，随着深度学习的兴起，神经网络语言模型也变得火热[4]。用神经网络训练语言模型的经典之作，要数Bengio等人发表的《A Neural Probabilistic Language Model》[3]，它也是基于n-gram的，首先将每个单词\\(w_{m-n+1},w_{m-n+2} ... w_{m-1}\\)映射到词向量空间，再把各个单词的词向量组合成一个更大的向量作为神经网络输入，输出是\\(P(w_m)\\)。本文将此模型简称为ffnnlm（Feed-forward Neural Net Language Model）。ffnnlm解决了传统n-gram的两个缺陷：(1)词语之间的相似性可以通过词向量来体现；(2)自带平滑功能。文献[3]不仅提出神经网络语言模型，还顺带引出了词向量，关于词向量，后文将再细述。
 
-![](./ffnnlm.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/ffnnlm.png)
 
 图3. 基于神经网络的语言模型
 
 从最新文献看，目前state-of-the-art语言模型应该是基于循环神经网络(recurrent neural network)的语言模型，简称rnnlm[5][6]。循环神经网络相比于传统前馈神经网络，其特点是：可以存在有向环，将上一次的输出作为本次的输入。而rnnlm和ffnnlm的最大区别是：ffnnmm要求输入的上下文是固定长度的，也就是说n-gram中的 n 要求是个固定值，而rnnlm不限制上下文的长度，可以真正充分地利用所有上文信息来预测下一个词，本次预测的中间隐层信息(例如下图中的context信息)可以在下一次预测里循环使用。
 
-![](./simple_rnn.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/simple_rnn.png)
 
 图4. 基于simple RNN(time-delay neural network)的语言模型
 
@@ -82,7 +82,7 @@ N-Gram语言模型简单有效，但是它只考虑了词的位置关系，没�
 
 基于RNN的language model利用BPTT(BackPropagation through time)算法比较难于训练，原因就是深度神经网络里比较普遍的vanishing gradient问题[55]（在RNN里，梯度计算随时间成指数倍增长或衰减，称之为Exponential Error Decay）。所以后来又提出基于LSTM(Long short term memory)的language model，LSTM也是一种RNN网络，关于LSTM的详细介绍请参考文献[54,49,52]。LSTM通过网络结构的修改，从而避免vanishing gradient问题，具体分析请参考文献[83]。
 
-![](./lstm_unit.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/lstm_unit.png)
 
 图5. LSTM memory cell
 
@@ -96,15 +96,15 @@ N-Gram语言模型简单有效，但是它只考虑了词的位置关系，没�
 \\(TermWeight=L_{i,j} G_i N_j\\)。\\(L_{i,j}\\)是term i在document j中的local weight，\\(G_i\\)是term i的global weight，\\(N_j\\)是document j的归一化因子。
 常见的local，global，normalization weight公式[2]有：
 
-	![](./local_weight.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/local_weight.png)
 
 	图6. Local weight formulas
 
-	![](./global_weight.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/global_weight.png)
 
 	图7. Global weight formulas
 
-	![](./normlization_weight.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/normlization_weight.png)
 
 	图8. Normalization factors
 
@@ -112,7 +112,7 @@ N-Gram语言模型简单有效，但是它只考虑了词的位置关系，没�
 
 	除了TF-IDF外，还有很多其他term weighting方法，例如Okapi，MI，LTU，ATC，TF-ICF[59]等。通过local，global，normalization各种公式的组合，可以生成不同的term weighting计算方法。不过上面这些方法都是无监督计算方法，有一定程度的通用性，但在一些特定场景里显得不够灵活，不够准确，所以可以基于有监督机器学习方法来拟合term weighting结果。
 
-	![](./okapi.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/okapi.png)
 	
 	图9. Okapi计算公式
 	
@@ -157,7 +157,7 @@ LDA的推导这里略过不讲，具体请参考文献[64]。下面我们主要�
 
 对文档d中词w的主题z进行重新采样的公式有非常明确的物理意义，表示为P(w|z)P(z|d)，直观的表示为一个“路径选择”的过程。
 
-![](./lda_sampling.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/lda_sampling.png)
 
 图10. gibbs sampling过程图
 
@@ -187,7 +187,7 @@ LDA的推导这里略过不讲，具体请参考文献[64]。下面我们主要�
 ##### 主题模型并行化
 在文献[67]中，Newman团队提出了LDA算法的并行化版本Approximate distributed-LDA，如下图所示：
 
-![](./ad_lda.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/ad_lda.png)
 
 图11. AD-LDA算法
 
@@ -208,7 +208,7 @@ LDA的推导这里略过不讲，具体请参考文献[64]。下面我们主要�
 
 最近的并行LDA实现Peacock[70,65]和LigthLda[13]没有开源()，但我们可以从其论文一窥究竟，总体来说，并行化的大体思路是一致的。譬如LightLDA[13]，下图是实现架构框图，它将训练数据切分成多个Block，模型通过parameter server来同步，每个data block，类似于sliding windows，在计算完V1的采样后，才会去计算V2的采样(下图中V1,V2,V3表示word空间的划分，即模型的划分)。
 
-![](./parallelism_lda.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/parallelism_lda.png)
 
 图12. LightLda并行结构图
 
@@ -221,7 +221,7 @@ LDA的推导这里略过不讲，具体请参考文献[64]。下面我们主要�
 - 模型更加简单，去掉了ffnnlm中的隐藏层，并去掉了输入层跳过隐藏层直接到输出层的连接。
 - 训练语言模型是利用第m个词的前n个词预测第m个词，而训练词向量是用其前后各n个词来预测第m个词，这样做真正利用了上下文来预测，如下图所示。
 
-![](word2vec.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/word2vec.png)
 
 图13. word2vec的训练算法
 	
@@ -256,19 +256,19 @@ Le和Mikolov在文章《Distributed Representations of Sentences and Documents�
 	- 训练过程中新增了paragraph id，即训练语料中每个句子都有一个唯一的id。paragraph id和普通的word一样，也是先映射成一个向量，即paragraph vector。paragraph vector与word vector的维数虽一样，但是来自于两个不同的向量空间。在之后的计算里，paragraph vector和word vector累加或者连接起来，作为输出层softmax的输入。在一个句子或者文档的训练过程中，paragraph id保持不变，共享着同一个paragraph vector，相当于每次在预测单词的概率时，都利用了整个句子的语义。
 	- 在预测阶段，给待预测的句子新分配一个paragraph id，词向量和输出层softmax的参数保持训练阶段得到的参数不变，重新利用梯度下降训练待预测的句子。待收敛后，即得到待预测句子的paragraph vector。
 
-	![](sentence2vec0.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/sentence2vec0.png)
 
 	图14. sentence2vec cbow算法
 
 - sentence2vec相比于word2vec的skip-gram模型，区别点为：在sentence2vec里，输入都是paragraph vector，输出是该paragraph中随机抽样的词。
 
-	![](sentence2vec1.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/sentence2vec1.png)
 
 	图15. sentence2vec skip-gram算法
 
 下面是sentence2vec的结果示例。先利用中文sentence语料训练句向量，然后通过计算句向量之间的cosine值，得到最相似的句子。可以看到句向量在对句子的语义表征上还是相当惊叹的。
 
-![](sentence2vec4.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/sentence2vec4.png)
 
 图16. sentence2vec 结果示例
 
@@ -287,22 +287,22 @@ $$f(x,y)*w(x,y) = \sum_{s=-a}^{a} \sum_{t=-b}^{b} w(s,t) f(x-s,y-t)$$
 
 f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器。卷积实际上是提供了一个权重模板，这个模板在图像上滑动，并将中心依次与图像中每一个像素对齐，然后对这个模板覆盖的所有像素进行加权，并将结果作为这个卷积核在图像上该点的响应。如下图所示，卷积操作可以用来对图像做边缘检测，锐化，模糊等。
 
-![](convolution1.png)
-![](convolution2.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/convolution1.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/convolution2.png)
 
 图17. 卷积操作示例
 
 ##### 什么是卷积神经网络
 卷积神经网络是一种特殊的、简化的深层神经网络模型，它的每个卷积层都是由多个卷积滤波器组成。它最先由lecun在LeNet[40]中提出，网络结构如下图所示。在cnn中，图像的一小部分（局部感受区域）作为层级结构的最低层的输入，信息再依次传输到不同的层，每层通过多个卷积滤波器去获得观测数据的最显著的特征。
 
-![](./lenet5.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/lenet5.png)
 
 图18. Lenet5网络结构图
 
 
 卷积神经网络中的每一个特征提取层（卷积层）都紧跟着一个用来求局部平均与二次提取的计算层（pooling层），这种特有的两次特征提取结构使网络在识别时对输入样本有较高的畸变容忍能力。如下图所示，就是一个完整的卷积过程[21]。
 
-![](convolution6.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/convolution6.png)
 
 图19. 一次完整的卷积过程
 
@@ -329,7 +329,7 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 
 - 将cnn作为文本分类器使用[36]。如下图所示，该cnn很简单，共分四层，第一层是词向量层，doc中的每个词，都将其映射到词向量空间，假设词向量为k维，则n个词映射后，相当于生成一张n*k维的图像；第二层是卷积层，多个滤波器作用于词向量层，不同滤波器生成不同的feature map；第三层是pooling层，取每个feature map的最大值，这样操作可以处理变长文档，因为第三层输出只依赖于滤波器的个数；第四层是一个全连接的softmax层，输出是每个类目的概率。除此之外，输入层可以有两个channel，其中一个channel采用预先利用word2vec训练好的词向量，另一个channel的词向量可以通过backpropagation在训练过程中调整。这样做的结果是：在目前通用的7个分类评测任务中，有4个取得了state-of-the-art的结果，另外3个表现接近最好水平。
 
-	![](cnn_text_classify.png)	
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/cnn_text_classify.png)	
 	
 	图20.基于CNN的文本分类
 
@@ -346,7 +346,7 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 	- 还可以先用某种无监督的聚类方法，将训练文本划分到某些clusters，建立这些clusters与ODP类目体系的对应关系，然后人工review这些clusters，切分或者合并cluster，提炼name，再然后根据知识体系，建立层级的taxonomy。
 	- 如果类目标签数目很多的话，我们一般会将类目标签按照一定的层次关系，建立类目树，如下图所示。那么接下来就可以利用层次分类器来做分类，先对第一层节点训练一个分类器，再对第二层训练n个分类器(n为第一层的节点个数)，依次类推。利用层次类目树，一方面单个模型更简单也更准确，另一方面可以避免类目标签之间的交叉影响，但如果上层分类有误差，误差将会向下传导。
 	
-		![](./taxonomy.png)
+		![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/taxonomy.png)
 	
 		图21. 层次类目体系
 
@@ -368,7 +368,7 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 	- 半监督学习，随着训练不断进行，自动标记的示例中的噪音会不断积累，其负作用会越来越大。所以如term weighting工作里所述，还可以从其他用户反馈环节提取训练数据，类似于推荐中的隐式反馈。
 	- 我们看一个具体的例子，在文献[45]中，twitter利用了三种方法，user-level priors（发布tweet的用户属于的领域），entity-level priors（话题，类似于微博中的#***#），url-level priors（tweet中的url）。利用上面三种数据基于一定规则获取到基本的训练数据，再通过Co-Training获取更多训练数据。上述获取到的都是正例数据，还需要负例样本。按照常见的方法，从非正例样本里随机抽取作为负例的方法，效果并不是好，文中用到了Pu-learning去获取高质量的负例样本，具体请参考文献[58]。
 	
-		![](./training_data_acquisition.png)
+		![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/training_data_acquisition.png)
 
 		图22.文献[45]训练数据获取流程图
 
@@ -409,7 +409,7 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 ##### 基于深度学习的图片分类
 传统的图片分类如下图所示，首先需要先手工提取图片特征，譬如SIFT, GIST，再经由VQ coding和Spatial pooling，最后送入传统的分类模型(例如SVM等)。
 
-![](tranditional-imageclassify.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/tranditional-imageclassify.png)
 
 图23. 传统图片分类流程图
 
@@ -418,13 +418,13 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 下图是一个经典的卷积神经网络模型图，由Hinton和他的学生Alex Krizhevsky在ILSVRC(Imagenet Large Scale Visual Recognition Competition) 2012中提出。
 整个网络结构包括五层卷积层和三层全连接层，网络的最前端是输入图片的原始像素点，最后端是图片的分类结果。一个完整的卷积层可能包括一层convolution，一层Rectified Linear Units，一层max-pooling，一层normalization。
 
-![](convolution7.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/convolution7.png)
 
 图24. 卷积神经网络结构图
 
 对于每一层网络，具体的网络参数配置如下图所示。InputLayer就是输入图片层，每个输入图片都将被缩放成227\*227大小，分rgb三个颜色维度输入。Layer1~ Layer5是卷积层，以Layer1为例，卷积滤波器的大小是11\*11，卷积步幅为4，本层共有96个卷积滤波器，本层的输出则是96个55\*55大小的图片。在Layer1，卷积滤波后，还接有ReLUs操作和max-pooling操作。Layer6~ Layer8是全连接层，相当于在五层卷积层的基础上再加上一个三层的全连接神经网络分类器。以Layer6为例，本层的神经元个数为4096个。Layer8的神经元个数为1000个，相当于训练目标的1000个图片类别。
 
-![](./convolution_config.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/convolution_config.png)
 
 图25. CNN网络参数配置图
 
@@ -432,13 +432,13 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 
 图片分类示例：
 
-![](image_classify.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/image_classify.png)
 
 图26. 图片分类示例图
 
 图片检索示例：
 
-![](image_search1.png) ![](image_search2.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/image_search1.png) ![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/image_search2.png)
 
 图27. 图片检索示例图
 
@@ -446,7 +446,7 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 
 在ILSVRC 2012中，Krizhevsky基于GPU实现了上述介绍的，这个有60million参数的模型，赢得了第一名。这个工作是开创性的，它引领了接下来ILSVRC的风潮。2013年，Clarifai通过cnn模型可视化技术调整网络架构，赢得了ILSVRC。2014年，google也加入进来，它通过增加模型的层数（总共22层），让深度更深[48]，并且利用multi-scale data training，取得第一名。baidu最近通过更加"粗暴"的模型[44]，在GooLeNet的基础上，又提升了10%，top-5错误率降低至6%以下。具体结果如下图所示。
 
-![](./imagenet_result.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images//imagenet_result.png)
 
 图28. ImageNet Classification Result
 
@@ -480,7 +480,7 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 
 其中种子图片，就是可以覆盖目前广告库中所有图片素材的行业，但较容易分析语义的图片集。这种方法产生了更加丰富而细粒度的语义表征结果。虽说简单，但效果仍然不错，方法的关键在于种子图片。利用比较好的种子图片(例如paipai数据)，简单的方法也可以work得不错。下图是该方法的效果图。
 
-![](image_semantic.png)  ![](image_semantic2.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/image_semantic.png)  ![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/image_semantic2.png)
 
 图29. 图片语义tag标注示例图
 
@@ -491,13 +491,13 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 ##### Image detection
 接下来再介绍下image detection。下图是一个image detection的示例，相比于图片分类，提取到信息将更加丰富。
 
-![](./image_detection.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/image_detection.png)
 
 图30. 图片detection示例
 
 目前最先进的detection方法应该是Region-based CNN(简称R-CNN)[75]，是由Jeff Donahue和Ross Girshick提出的。R-CNN的具体想法是，将detection分为寻找object和识别object两个过程。在第一步寻找object，可以利用很多region detection算法，譬如selective search[76]，CPMC，objectness等，利用很多底层特征，譬如图像中的色块，图像中的边界信息。第二步识别object，就可以利用"CNN+SVM"来做分类识别。
 
-![](./r-cnn.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/r-cnn.png)
 	
 图31. Image detection系统框图
 	
@@ -511,7 +511,7 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 
 那能否通过深度学习方法，直接根据image产生sentence呢？我们先看一组实际效果，如下图所示(copy from 文献[43])。
 
-![](./image2sentence_example.png)
+![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/image2sentence_example.png)
 
 图32. image2sentence示例图
 
@@ -521,7 +521,7 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 
 - Pipeline方法。这个思路相对直观一点，先学习到image中visual object对应的word(如上一节image detection所述)，再加上language model，就可以生成sentence。这种方法各个模块可以独立调试，相对来说，更灵活一点。如下图所示，这是microsoft的一个工作[81]，它分为三步：(1)利用上一节提到的思路detect words；(2)基于language model(RNN or LSTM)产生句子；(3)利用相关性模型对句子打分排序。
 
-	![](AIC.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/AIC.png)
 	
 	图33. "pipeline" image captioning
 
@@ -529,15 +529,15 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 
 	那么一个直观的想法是，能否复用上面的框架，考虑到CNN在图片特征提取方面的成功应用，将encoder RNN替换成CNN，先利用CNN将图片转换到一个向量表示，再利用RNN将其转换到sentence。可以通过图片分类提前训练好CNN模型，将CNN最后一个隐藏层作为encoder RNN的输入，从而产生句子描述。如下图所示。
 
-	![](./cnn_rnn.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/cnn_rnn.png)
 
-	![](./cnn_lstm.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/cnn_lstm.png)
 	
 	图34. "CNN+LSTM" Image Caption Generator
 
 	Li-Feifei团队在文献[35]也提到一种image2sentence方法，如下图所示。与google的做法类似，图片的CNN特征作为RNN的输入。
 
-	![](cnn-rnn.png)
+	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/cnn-rnn.png)
 	
 	图35. "CNN+RNN"生成图片描述
 	
