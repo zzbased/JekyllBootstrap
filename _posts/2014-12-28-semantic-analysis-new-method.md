@@ -1,110 +1,92 @@
 ---
 layout: post
-title: "semantic analysis new method"
+title: "语义分析方法参考文献"
 description: ""
 category: 
 tags: [machine learning]
 ---
 {% include JB/setup %}
 
-## 语义分析方法
-
-语义分析，这里指运用各种机器学习方法，挖掘与学习文本、图片等的深层次概念。wikipedia上的解释：[In machine learning, semantic analysis of a corpus is the task of building structures that approximate concepts from a large set of documents.](http://en.wikipedia.org/wiki/Semantic_analysis_(machine_learning))。
-
-工作这几年，陆陆续续做过一些项目，其实有些是：文本语义分析，图片语义理解，语义索引，短串语义关联，用户广告语义匹配... 感觉只要沾上点"语义"，就摇身一变顿时高大上了，有木有？可是真的有高大上吗？其实不然了。接下来我将聊一聊我所认识的语义分析，虽说接触也许并不深入，不过权当自己的总结好了。
-
-下文主要由以下两部分组成：传统语义分析方法，基于深度学习的语义分析。
-
-先把nlp的任务过一遍，顺便讲一下基本的方法。
-这些任务包括下面列到的：切词，语言模型，termweighting
-
-### 文本基本处理
-#### 分词
-拿到一段文本后，通常情况下，首先要做分词。分词的方法一般有如下几种：
-
-- 基于字符串匹配的分词方法。此方法按照不同的扫描方式，逐个查找词库进行分词。根据扫描方式可细分为：正向最大匹配，反向最大匹配，最小切分，双向最大匹配。
-- 全切分方法。它首先切分出与词表匹配的所有可能的词，再运用统计语言模型决定最优的切分结果。它的优点在于可以发现所有的切分歧义并且容易将新词提取出来。
-- 基于知识理解的分词方法。该方法主要基于句法、语法分析，并结合语义分析，通过对上下文内容所提供信息的分析对词进行定界。
-
-[1](http://blog.sina.com.cn/s/blog_7eb42b5a0100vf8l.html)
-[2](http://blog.sina.com.cn/s/blog_6876a34b0100uq49.html)
-[3](http://www.cnblogs.com/flish/archive/2011/08/08/2131031.html)
-
-一般而言，方法一，二用得比较多，方法二相对更加准确，但在工业界方法一可能用得更多。
-
-#### 语言模型
-前面在讲全切分分词方法时，提到了语言模型。所以先把语言模型简单阐述一下。
-
-fandy的统计语言模型。
-
-rnn - 做语言模型。
-
-#### Term Weighting
-对文本分词后，接下来需要对分词后的每个term计算一个权重，重要的term应该给与更高的权重。举例来说，"什么产品对减肥帮助最大？"的term weighting结果可能是: "什么 0.1，产品 0.5，对 0.1，减肥 0.8，帮助 0.3，最大 0.2"。
-
-- 最常见的方法是Tf-idf。tf-idf
-
-- 利用机器学习方法来预测weight。
-
-#### 命名实体识别
-
-#### 短串成分分析
-
-### 文本语义分析
-
-#### 文本分类
-
-#### 文本topic分析
-
-#### 词向量，句向量
-
-
-### 图片语义分析
-
-#### 图片分类
-
-#### 图片topic分析
-
-#### image2text，image2sentence
-
-
-
+# 语义分析方法参考文献
 
 
 ### 语义分析的任务
-我的理解里，文本语义分析主要包括以下任务：
-- 切词/Term weighting
-- 命名实体识别/新词发现
-- 短串成分分析
-- 文本翻译
-- 文本分类
-- 文本topic分析
 
-图片语义分析主要包括以下任务：
-- 图片分类
-- 图片topic分析
+What we’ll do: Summarize 2 ways Deep/Neural ideas can be used
 
-- Sequence labelingPOS tagging & Name Entity Recognition [Turian et al., 2010, Collobert et al., 2011, Wang and Manning, 2013, Ma et al., 2014, Tsuboi, 2014, Guo et al., 2014, Qi et al., 2014]Word Segmentation [Zheng et al., 2013, Pei et al., 2014] 
+- As non-linear classifier
+- As distributed representation
 
-- Syntax & MorphologyDependency Parsing [Stenetorp, 2013, Chen et al., 2014a, Levy and Goldberg, 2014, Bansal et al., 2014, Chen and Manning, 2014, Le and Zuidema, 2014]Constituency Parsing [Billingsley and Curran, 2012, Socher et al., 2013a, Andreas and Klein, 2014]CCG [Hermann and Blunsom, 2013], Selectional Preference [Van de Cruys, 2014], Morphology [Luong et al., 2013] 
+- Exploiting Non-linear Classifiers
+It’s possible to directly apply Deep Learning to text problems with little modification, as evidenced by [Glorot et al., 2011]
+But sometimes NLP-specific modifications are needed, e.g. training objective mismatch in Machine Translation N-best experiment
 
-- SemanticsWord Representations [Tsubaki et al., 2013, Srivastava et al., 2013, Rockt ̈aschel et al., 2014, Baroni et al., 2014, Hashimoto et al., 2014, Pennington et al., 2014, Neelakantan et al., 2014, Chen et al., 2014b, Milajevs et al., 2014]Semantic Role Labeling: [Hermann et al., 2014, Roth and Woodsend, 2014] Paraphrase [Socher et al., 2011]Grounding/Multi-modal [Fyshe et al., 2014, Kiela and Bottou, 2014]- Discourse[Ji and Eisenstein, 2014, Li et al., 2014a]- Question Answering, Knowledge Bases, & Relation Extraction[Hashimoto et al., 2013, Fu et al., 2014, Chang et al., 2014, Yih et al., 2014, Bordes et al., 2014, Iyyer et al., 2014, Yang et al., 2014, Gardner et al., 2014]- Sentiment Analysis[Glorot et al., 2011, Socher et al., 2013b, Irsoy and Cardie, 2014]Summarization[Liu et al., 2012]- Novel ApplicationsPoetry [Zhang and Lapata, 2014], Interestingness [Gao et al., 2014b], Hashtags [Weston et al., 2014]
+- Exploiting Distributed Representation
+Distributed Representation is a simple way to improve robustness of NLP, but it’s not the only way (POS tagging experiment)
+Promising direction: distributed representations beyond words, considering e.g. compositionality [Socher et al., 2013a]
 
-What we’ll do: Summarize 2 ways Deep/Neural ideas can be used1 As non-linear classifier2 As distributed representation
+---
 
-- Exploiting Non-linear ClassifiersIt’s possible to directly apply Deep Learning to text problems with little modification, as evidenced by [Glorot et al., 2011]But sometimes NLP-specific modifications are needed, e.g. training objective mismatch in Machine Translation N-best experiment- Exploiting Distributed RepresentationDistributed Representation is a simple way to improve robustness of NLP, but it’s not the only way (POS tagging experiment)Promising direction: distributed representations beyond words, considering e.g. compositionality [Socher et al., 2013a]
+slides: deep learning for natural language processing and machine translation：
 
+- Language Models (LM) using Neural Nets。见72页。
+- Recurrent Neural Net Language Models [Mikolov et al., 2010]。见75页。
+- P99。参考文献。
 
-ppt: deep learning for natural language processing and machine translation：
+	- Sequence labeling
+POS tagging & Name Entity Recognition [Turian et al., 2010, Collobert et al., 2011, Wang and Manning, 2013,  ]
+Qi et al., 2014: A deep learning framework for character-based information extraction. Ma et al., 2014: Tagging the web: Building a robust web tagger with neural network.
+Tsuboi, 2014: Neural networks leverage corpus-wide information for part-of-speech tagging.
+Guo et al., 2014: Revisiting embedding features for simple semi-supervised learning.
 
-Language Models (LM) using Neural Nets。见72页。
+	- Word Segmentation [Zheng et al., 2013, Pei et al., 2014] 
+Max-margin tensor neural network for chinese word segmentation.
+Deep learning for Chinese word segmentation and POS tagging.
 
-Recurrent Neural Net Language Models [Mikolov et al., 2010]。见75页。
+	- Semantics
+Word Representations [Tsubaki et al., 2013, Srivastava et al., 2013, Rockt ̈aschel et al., 2014, Baroni et al., 2014, Hashimoto et al., 2014, Pennington et al., 2014, Neelakantan et al., 2014, Chen et al., 2014b, Milajevs et al., 2014]
+Evaluating neural word representations in tensor-based compositional settings.
+A unified model for word sense representation and disambiguation.
+Efficient non-parametric estimation of multiple embeddings per word in vector space.
+Glove: Global vectors for word representation.
+Jointly learning word representations and composition functions using predicate-argument structures.
+Don’t count, predict! a systematic comparison of context-counting vs. context-predicting semantic vectors.
 
-P99。参考文献。
+---
+
+自然语言处理的基本任务
+自然语言（Natural Language）其实就是人类语言，自然语言处理（NLP）就是对人类语言的处理，当然主要是利用计算机。自然语言处理是关于计算机科学和语言学的交叉学科，常见的研究任务包括：
+
+- 分词（Word Segmentation或Word Breaker，WB）
+
+- 信息抽取（Information Extraction，IE）：命名实体识别和关系抽取（Named Entity Recognition & Relation Extraction，NER）
+
+- 词性标注（Part Of Speech Tagging，POS）
+
+- 指代消解（Coreference Resolution）
+
+- 句法分析（Parsing）
+
+- 词义消歧（Word Sense Disambiguation，WSD）
+
+- 语音识别（Speech Recognition）
+
+- 语音合成（Text To Speech，TTS）
+
+- 机器翻译（Machine Translation，MT）
+
+- 自动文摘（Automatic Summarization）
+
+- 问答系统（Question Answering）
+
+- 自然语言理解（Natural Language Understanding）
+
+- OCR
+
+- 信息检索（Information Retrieval，IR）
+
 
 ### 传统文本语义分析
-本小节主要内容：term weighting，短串匹配，topic model，分类。
 
 【Query意图分析：记一次完整的机器学习过程（scikit learn library学习笔记）】http://t.cn/RvUNAsG 博客园zero_learner的博文。利用Python机器学习包Scikit Learn具体解决Query意图问题，是一个机器学习实践的很好示例。另外作者推荐阅读相关文章“如何选择机器学习分类器”：http://t.cn/RvA6amn
 
@@ -116,12 +98,9 @@ http://net.pku.edu.cn/~zhaoxin/Topic-model-xin-zhao-wayne.pdf
 转//@徐君_: SMIR 2014的邀请报告云集了IR和NLP的大牛，UMass的Bruce Croft教授、微软研究院的Jianfeng Gao研究员、CMU的Ed Hovy教授、马里兰大学的Doug Oard教授和阿姆斯特丹大学的Maarten de Rijek教授将与大家探讨信息检索和自然语言处理中的语义匹配，敬请期待！
 @徐君_ 语义匹配(Semantic Matching)是信息检索与自然语言处理的核心问题之一，欢迎大家关注与投稿SIGIR 2014 Workshop on Semantic Matching in Information Retrieval (SMIR 2014) http://t.cn/8sVnfFi 。时间：7月11日，地点：澳大利亚黄金海岸，投稿截止日期：5月10日。 @李航博士
 
-### 传统图片语义分析
-本小节主要内容：图片topic model。
 
 ### 基于深度学习的文本语义分析
-本小节主要内容：rnnlm，word embeddings。
-word2vec，sentence-vector。glove。
+本小节主要内容：rnnlm，word embeddings，word2vec，sentence-vector。glove。
 
 word embeddings
 
@@ -133,10 +112,15 @@ Cross-lingual Joint Representation
 Visual-Text Joint Representation
 
 
-- Replicated Softmax: an Undirected Topic Model (NIPS 2010)- A Deep Architecture for Matching Short Texts (NIPS 2013)- Modeling Documents with a Deep Boltzmann Machine (UAI 2013)
+- Replicated Softmax: an Undirected Topic Model (NIPS 2010)
+- A Deep Architecture for Matching Short Texts (NIPS 2013)
+- Modeling Documents with a Deep Boltzmann Machine (UAI 2013)
 - A Convolutional Neural Network for Modelling Sentences(ACL 2014)
 
-Distributed representation can be used•  as pre-training of deep learning•  to build features of machine learning tasks•  as a unified model to integrate heterogeneous information (text, image, ...)
+Distributed representation can be used
+•  as pre-training of deep learning
+•  to build features of machine learning tasks
+•  as a unified model to integrate heterogeneous information (text, image, ...)
 
 
 
@@ -148,7 +132,6 @@ Distributed representation can be used•  as pre-training of deep learning•
 
 lda结构是word-hidden topic。类lda结构假设在topic下产生每个word是条件独立而且参数相同。这种假设导致参数更匹配长文而非短文。这篇文章提出word-hidden topic-hidden word，其实是(word,hidden word)-hidden topic。增加的hidden word平衡了参数对短文的适配，在分类文章数量的度量上更好很自然。
 @王威廉 经过不懈的努力，Geoff Hinton及其弟子终于用Deep Boltzmann Machine捣鼓出了类似LDA的隐变量文本模型，号称其抽取的特征在文本检索与文本分类上的结果比LDA好。UAI2013论文：http://t.cn/zQbzwVi
-
 
 @张俊林say 最近几个月比较关注深度学习在自然语言处理方面的应用，虽然总体而言DL在NLP并未像图像和语音识别领域一样展现出突破性的进展，但是我个人比较看好这个方向的发展前景，把目前主流的相关工作梳理了一下，后续会不断维护版本更新以及我们在这方面的探索结果。http://t.cn/Rz4Jkia
 
@@ -204,10 +187,30 @@ word2vec也是mikolov的作品，与rnnlm相比目的不太一样，rnnlm主要�
 rnnlm是怎么用到二分类上去的? 针对不同的label，训练两个不同的语言模型p+(x|y=+1)和p-(x|y=-1)。对于一个testcase x，求解r= p+(x|y=+1)/p-(x|y=-1)*p(y=+1)/p(y=-1)，如果r>1，则x属于label(+1)，否则x属于label(-1)。
 
 其预测脚本为：
-	./rnnlm -rnnlm model-pos -test test-id.txt -debug 0 -nbest > model-pos-score	./rnnlm -rnnlm model-neg -test test-id.txt -debug 0 -nbest > model-neg-score	paste model-pos-score model-neg-score | awk '{print $1 " " $2 " " $1/$2;}' > ../scores/RNNLM-TEST
+
+./rnnlm -rnnlm model-pos -test test-id.txt -debug 0 -nbest > model-pos-score
+./rnnlm -rnnlm model-neg -test test-id.txt -debug 0 -nbest > model-neg-score
+paste model-pos-score model-neg-score | awk '{print $1 " " $2 " " $1/$2;}' > ../scores/RNNLM-TEST
 
 ![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/rnnlm_image.png)
 ![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/rnnlm_formula.png)
+
+####LSTM
+http://hlgljmw.com/baijiale/?p/3405569985
+
+原作者写的教程
+http://people.idsia.ch/~juergen/lstm/sld001.htm
+BPTT很好理解，说是RNN，其实可以理解为每层权重相同的feed forward BP，每层都用时间点上的label来训练，每层的误差都反传，这样就还原为了标准BP网络
+
+然后就会面临BP网络的经典问题，即Exponential Error Decay，误差传4层就传没了！这个东西的具体解释见
+Hochreiter,Bengio, Frasconi,(2001) Gradient flow in recurrent nets: The difficulty of learning long-term dependencies （基本看不懂）
+
+http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=3D5F45337EDCE4B9A70877162000D39F?doi=10.1.1.24.7321&rep=rep1&type=pdf
+为了解决这个问题而发明了LSTM，目的是为了将这些反传的误差保存起来，它纯粹是为了解决BPTT中的Exponential Error Decay的问题；核心部件（下图红圆）叫做error carousel(误差传送带)，就是一个最简单的RNN积分器；除了这部分以外还有两个网络来控制红色部分的输入输出，分别称为in和out，用来控制红色部分在何时存取
+动机（摘自wikipedia）
+
+however, when error values are back-propagated from the output, the error becomes trapped in the memory portion of the block. This is referred to as an "error carousel", which continuously feeds error back to each of the gates until they become trained to cut off the value. Thus, regular backpropagation is effective at training an LSTM block to remember values for very long durations.
+
 
 #### sentence vector
 句向量是通过词向量演化出来的。具体请参考论文[Distributed representations of sentences and documents]()
@@ -218,14 +221,143 @@ rnnlm是怎么用到二分类上去的? 针对不同的label，训练两个不�
 ensemble的方法有很多，线性ensemble，指数ensemble。
 
 ### 参考论文 
+
+1. [Term-weighting approaches in automatic text retrieval，Gerard Salton et.](http://comminfo.rutgers.edu/~muresan/IR/Docs/Articles/ipmSalton1988.pdf)  2. [New term weighting formulas for the vector space method in information retrieval](http://www.sandia.gov/~tgkolda/pubs/pubfiles/ornl-tm-13756.pdf)  3. [A neural probabilistic language model 2003](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)  4. [Deep Learning in NLP-词向量和语言模型](http://licstar.net/archives/328)  5. [Recurrent neural network based language models](http://www.fit.vutbr.cz/research/groups/speech/publi/2010/mikolov_interspeech2010_IS100722.pdf)6. Statistical Language Models based on Neural Networks，mikolov博士论文  7. [Rnnlm library](http://www.fit.vutbr.cz/~imikolov/rnnlm/)  8. [A survey of named entity recognition and classification](http://brown.cl.uni-heidelberg.de/~sourjiko/NER_Literatur/survey.pdf)  9. [Deep learning for Chinese word segmentation and POS tagging](http://www.aclweb.org/anthology/D13-1061)  10. [Max-margin tensor neural network for chinese word segmentation](http://aclweb.org/anthology/P14-1028)  11. [Learning distributed representations of concepts](http://www.cogsci.ucsd.edu/~ajyu/Teaching/Cogs202_sp12/Readings/hinton86.pdf)  12. [Care and Feeding of Topic Models: Problems, Diagnostics, and Improvements](http://www.cs.colorado.edu/~jbg/docs/2014_book_chapter_care_and_feeding.pdf)  13. [LightLda](http://arxiv.org/abs/1412.1576)  14. [word2vec](https://code.google.com/p/word2vec/)  15. [Efficient Estimation of Word Representations in Vector Space](http://arxiv.org/pdf/1301.3781v3.pdf)  16. [Deep Learning实战之word2vec](http://techblog.youdao.com/?p=915)  17. [word2vec中的数学原理详解](http://suanfazu.com/t/word2vec-zhong-de-shu-xue-yuan-li-xiang-jie-duo-tu-wifixia-yue-du/178) [出处2](http://blog.csdn.net/itplus/article/details/37969519)  
+18. [斯坦福课程-语言模型](http://52opencourse.com/111/%E6%96%AF%E5%9D%A6%E7%A6%8F%E5%A4%A7%E5%AD%A6%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E8%AF%BE-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%88language-modeling%EF%BC%89)  
+19. [Translating Videos to Natural Language Using Deep Recurrent Neural Networks](http://arxiv.org/abs/1412.4729) 20. [Distributed Representations of Sentences and Documents](http://arxiv.org/pdf/1405.4053v2.pdf)  21. [Convolutional Neural Networks卷积神经网络](http://blog.csdn.net/zouxy09/article/details/8781543)  22. [A New, Deep-Learning Take on Image Recognition](http://research.microsoft.com/en-us/news/features/spp-102914.aspx)  23. [Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition](http://arxiv.org/pdf/1406.4729v1.pdf)  24. [A Deep Learning Tutorial: From Perceptrons to Deep Networks](http://www.toptal.com/machine-learning/an-introduction-to-deep-learning-from-perceptrons-to-deep-networks)  25. [Deep Learning for Computer Vision](http://cs.nyu.edu/~fergus/presentations/nips2013_final.pdf)   26. [Zero-shot leanring by convex combination of semantic embeddings](http://arxiv.org/pdf/1312.5650.pdf)  27. [Sequence to sequence learning with neural network](http://arxiv.org/pdf/1409.3215v3.pdf)  28. [Exploting similarities among language for machine translation](http://arxiv.org/pdf/1309.4168.pdf)  
+29. Grammar as Foreign Language Oriol Vinyals, Lukasz Kaiser, Terry Koo, Slav Petrov, Ilya Sutskever, Geoffrey Hinton, arXiv 2014
+30. [Deep Semantic Embedding](http://ceur-ws.org/Vol-1204/papers/paper_4.pdf)  
+31. 张家俊. DNN Applications in NLP  
+32. [Deep learning for natural language processing and machine translation](http://cl.naist.jp/~kevinduh/notes/cwmt14tutorial.pdf)  
+33. [Distributed Representations for Semantic Matching]()  
+34. distributed_representation_nlp  
+35. Deep Visual-Semantic Alignments for Generating Image Descriptions  
+36. [Convolutional Neural Networks for Sentence Classification](http://arxiv.org/pdf/1408.5882v2.pdf)  
+37. [Senna](http://ml.nec-labs.com/senna)  
+38. [ImageNet Large Scale Visual Recognition Challenge](http://arxiv.org/pdf/1409.0575v1.pdf)  
+39. Krizhevsky A, Sutskever I, Hinton G E. ImageNet Classification with Deep Convolutional Neural Networks    
+40. [Gradient-Based Learning Applied to Document Recognition](http://turing.iimas.unam.mx/~elena/CompVis/Lecun98.pdf)  
+41. Effetive use of word order for text categorization with convolutional neural network，Rie Johnson  
+42. [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](http://arxiv.org/pdf/1406.1078.pdf)  
+43. [Show and Tell: A Neural Image Caption Generator](http://arxiv.org/pdf/1411.4555v1.pdf)  
+44. [Deep Image: Scaling up Image Recognition](http://arxiv.org/ftp/arxiv/papers/1501/1501.02876.pdf)  
+45. Large-Scale High-Precision Topic Modeling on Twitter
+46. A. Krizhevsky. One weird trick for parallelizing convolutional neural networks. arXiv:1404.5997, 2014  
+47. [A Brief Overview of Deep Learning](http://yyue.blogspot.com/2015/01/a-brief-overview-of-deep-learning.html)  
+48. Going deeper with convolutions. Christian Szegedy. Google Inc. [阅读笔记](http://www.gageet.com/2014/09203.php)  
+49. Long Short-Term Memory Recurrent Neural Network Architectures for Large Scale Acoustic Modeling
+50. [Semi-Supervised Learning Tutorial](http://pages.cs.wisc.edu/~jerryzhu/pub/sslicml07.pdf)  
+51. http://www.zhihu.com/question/24904450
+52. [LONG SHORT-TERM MEMORY BASED RECURRENT NEURAL NETWORK ARCHITECTURES FOR LARGE VOCABULARY SPEECH RECOGNITION](http://arxiv.org/pdf/1402.1128.pdf)
+53. [LSTM Neural Networks for Language Modeling](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.248.4448&rep=rep1&type=pdf)
+54. [LONG SHORT-TERM MEMORY](http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_lstm.pdf)
+55. Bengio, Y., Simard, P., Frasconi, P., “Learning long-term dependencies with gradient descent is difficult” IEEE Transactions on Neural Networks 5 (1994), pp. 157–166
+56. [AliasLDA](http://www.sravi.org/pubs/fastlda-kdd2014.pdf)
+57. [Gibbs sampling for the uninitiated](www.umiacs.umd.edu/~resnik/pubs/LAMP-TR-153.pdf)
+58. [Learning classifiers from only positive and unlabeled data](http://www.eecs.tufts.edu/~noto/pub/kdd08/elkan.kdd08.poster.pdf)
+59. [TF-ICF: A New Term Weighting Scheme for Clustering Dynamic Data Streams](http://cda.ornl.gov/publications/ICMLA06.pdf)
+60. [LDA数学八卦](http://www.flickering.cn/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/2014/06/%E3%80%90lda%E6%95%B0%E5%AD%A6%E5%85%AB%E5%8D%A6%E3%80%91%E7%A5%9E%E5%A5%87%E7%9A%84gamma%E5%87%BD%E6%95%B0/)
+61. [Chinese Word Segmentation and Named Entity Recognition Based on Conditional Random Fields Models](http://www.aclweb.org/anthology/W06-0132)  
+62. [Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1162&context=cis_papers)  
+63. [Chinese Segmentation and New Word Detection using Conditional Random Fields](http://scholarworks.umass.edu/cgi/viewcontent.cgi?article=1091&context=cs_faculty_pubs)  
+64. [Gregor Heinrich. Parameter estimation for text analysis](http://www.arbylon.net/publications/text-est.pdf)
+65. [Peacock：大规模主题模型及其在腾讯业务中的应用](http://km.oa.com/group/14352/articles/show/213192)
+66. L. Yao, D. Mimno, and A. McCallum. Efficient methods for topic model inference on streaming document collections. In KDD, 2009.
+67. [David Newman. Distributed Algorithms for Topic Models](http://www.jmlr.org/papers/volume10/newman09a/newman09a.pdf)
+68. [Xuemin. LDA工程实践之算法篇](http://www.flickering.cn/nlp/2014/07/lda工程实践之算法篇-1算法实现正确性验证/)
+69. [Brian Lott. Survey of Keyword Extraction Techniques](http://www.cs.unm.edu/~pdevineni/papers/Lott.pdf)
+70. Yi Wang, Xuemin Zhao, Zhenlong Sun, Hao Yan, Lifeng Wang, Zhihui Jin, Liubin Wang, Yang Gao, Ching Law, and Jia Zeng. Peacock: Learning Long-Tail Topic Features for Industrial Applications. TIST’2015.
+71. [刘知远. 基于文档主题结构的关键词抽取方法研究](http://nlp.csai.tsinghua.edu.cn/~lzy/publications/phd_thesis.pdf)
+72. [Hinton. Reducing the Dimensionality of Data with Neural Networks](http://www.cs.toronto.edu/~hinton/science.pdf)
+73. [Samaneh Moghaddam. On the design of LDA models for aspect-based opinion mining](http://dl.acm.org/citation.cfm?id=2396863)；
+74. The FLDA model for aspect-based opinion mining: addressing the cold start problem
+75. [Ross Girshick et. Rich feature hierarchies for accurate object detection and semantic segmentation](http://www.cs.berkeley.edu/~rbg/papers/r-cnn-cvpr.pdf)
+76. J. Uijlings, K. van de Sande, T. Gevers, and A. Smeulders. Selective search for object recognition. IJCV, 2013.
+77. [Baidu/UCLA: Explain Images with Multimodal Recurrent Neural Networks](http://arxiv.org/abs/1410.1090)
+78. [Toronto: Unifying Visual-Semantic Embeddings with Multimodal Neural Language Models](http://arxiv.org/abs/1411.2539)
+79. [Berkeley: Long-term Recurrent Convolutional Networks for Visual Recognition and Description](http://arxiv.org/abs/1411.4389)
+80. [Xinlei Chen et. Learning a Recurrent Visual Representation for Image Caption Generation](http://arxiv.org/abs/1411.5654)
+81. [Hao Fang et. From Captions to Visual Concepts and Back](http://arxiv.org/pdf/1411.4952v2)
+82. [Modeling Documents with a Deep Boltzmann Machine](http://www.cs.toronto.edu/~nitish/uai13.pdf)
+83. [A Deep Dive into Recurrent Neural Nets](http://nikhilbuduma.com/2015/01/11/a-deep-dive-into-recurrent-neural-networks/)
+
+word2vec的其他参考文章：- http://blog.csdn.net/mytestmy/article/details/26961315
+- http://blog.csdn.net/mytestmy/article/details/26969149
+- www.zhihu.com/question/21661274/answer/19331979
+- http://suanfazu.com/t/wen-ben-shen-du-biao-shi-mo-xing-word2vec/258
+- [word2vec在事件挖掘中的运用](http://blog.csdn.net/shuishiman/article/details/20769437#1536434-tsina-1-26292-66a1f5d8f89e9ad52626f6f40fdeadaa)
+
+
+Zero-shot：
 - [zero-shot leanring by convex combination of semantic embeddings]()
 - [distributed representations of sentences and documents]()
 
 - [sequence to sequence learning with neural network]()
 - [exploting similarities among language for machine translation]()
 
+SVD:
 
-DataScientist   2014-11-10 13:30
-Fast Randomized SVD http://t.cn/R71pgaC
+- [Fast Randomized SVD](https://research.facebook.com/blog/294071574113354/fast-randomized-svd/)
 
-https://github.com/memect/hao/blob/master/awesome/chinese-word-similarity.md
+相似度计算：
+
+- [chinese-word-similarity](https://github.com/memect/hao/blob/master/awesome/chinese-word-similarity.md)
+
+中文分词参考文献：
+
+- [白话中文分词之HMM模型](http://yanyiwu.com/work/2014/04/07/hmm-segment-xiangjie.html)
+- [浅谈中文分词](http://www.isnowfy.com/introduction-to-chinese-segmentation/)
+- [分词km](http://km.oa.com/news/post/21560)
+- [52nlp中文分词](http://www.52nlp.cn/category/word-segmentation)
+- [Deep Learning 在中文分词和词性标注任务中的应用](http://blog.csdn.net/itplus/article/details/13616045)
+- [利用 word2vec 训练的字向量进行中文分词](http://blog.csdn.net/itplus/article/details/17122431)
+- [分词原理1](http://blog.sina.com.cn/s/blog_7eb42b5a0100vf8l.html)
+- [分词原理2](http://blog.sina.com.cn/s/blog_6876a34b0100uq49.html)
+- [分词原理3](http://www.cnblogs.com/flish/archive/2011/08/08/2131031.html)
+
+LaTex：
+
+- [Markdown中插入数学公式的方法](http://blog.csdn.net/xiahouzuoxin/article/details/26478179)
+- [LaTeX/数学公式](http://zh.wikibooks.org/zh-cn/LaTeX/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F)
+- [LaTeX数学公式输入初级](http://blog.sina.com.cn/s/blog_5e16f1770100fs38.html)
+
+半监督学习：
+
+- [半监督学习1](http://blog.csdn.net/ice110956/article/details/13775071)
+- [半监督学习2](http://www.cnblogs.com/liqizhou/archive/2012/05/11/2496155.html)
+- [Semi-Supervised Learning Tutorial](http://pages.cs.wisc.edu/~jerryzhu/pub/sslicml07.pdf)  
+
+大规模机器学习：
+
+- [Muli：Scaling Distributed Machine Learning with the Parameter Server](http://www.cs.cmu.edu/~muli/file/pdl14_talk.pdf)
+
+图片搜索：
+
+- [图片搜索的原理](http://lusongsong.com/info/post/155.html)
+- [相似图片搜索的原理](http://www.ruanyifeng.com/blog/2011/07/principle_of_similar_image_search.html)
+
+卷积：
+
+- [卷积的物理意义](http://www.zhihu.com/question/21686447)
+
+RNN，CNN paper整理：
+
+-[Deep Learning方向的paper整理](http://hi.baidu.com/chb_seaok/item/6307c0d0363170e73cc2cb65)
+
+R-CNN:
+
+- [rcnn1](http://blog.csdn.net/chenriwei2/article/details/41725871)
+- [rcnn2](http://blog.csdn.net/chenriwei2/article/details/38110387)
+
+
+Image Understand：
+
+- [image-captioning](https://pdollar.wordpress.com/2015/01/21/image-captioning/)
+- [image-captioning2](http://blogs.technet.com/b/machinelearning/archive/2014/11/18/rapid-progress-in-automatic-image-captioning.aspx)
+
+语义分析 新文献:
+
+- Learning Image Embeddings using Convolutional Neural Networks for Improved Multi-Modal Semantics
+- A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval
+- Unsupervised Learning of Word Semantic Embedding using the Deep Structured Semantic Model
+- Semantics of Visual Discrimination
