@@ -13,10 +13,11 @@ tags: [machine learning]
 
 数据挖掘技术在推荐系统的应用;陈运文 
 
+[陈运文: CIKM 数据挖掘竞赛夺冠算法介绍](http://www.52cs.org/?p=369)
+
 [Tutorial: Recommender Systems;Dietmar Jannach](http://ijcai13.org/files/tutorial_slides/td3.pdf)
 
 Google News Personalization: Scalable Online Collaborative Filtering。大规模cf的实现。
-
 
 [Application of Dimensionality Reduction in Recommender System -- A Case Study](http://ai.stanford.edu/~ronnyk/WEBKDD2000/papers/sarwar.pdf)
 
@@ -72,9 +73,9 @@ mlss2014- Recommender Systems.pdf 请参考微云中的文件。
 
  这个是对于Amazon商品推荐算法的一个Paper的翻译版
 http://blog.sina.com.cn/s/blog_586631940100pduh.html
-   这个Paper比较老了，但是是item-Based推荐的经典文章了。
+  这个Paper比较老了，但是是item-Based推荐的经典文章了。
 这个是IBM的两位同学对于推荐的一个综述，属于入门级的，看看也不错。 
-    http://www.ibm.com/developerworks/cn/web/1103_zhaoct_recommstudy1/index.html
+  http://www.ibm.com/developerworks/cn/web/1103_zhaoct_recommstudy1/index.html
 这个比较有营养，是高级货，是LinkedIn的兄弟们在KDD2012上发布的，有用！进阶以后值得看看，尤其是搞真系统的。http://t.cn/zl0ZTN1
 这个更是高级货了，Recommendations as a Conversation with the User 
 这个的角度更多的是推荐系统的HCI设计，前面是一堆哲学，看不懂可以跳过，后面的例子还是比较给力的。有几个数字很给力：

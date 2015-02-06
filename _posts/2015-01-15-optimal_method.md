@@ -23,6 +23,8 @@ tags: []
 
 [机器学习中导数最优化方法](http://www.cnblogs.com/daniel-D/p/3377840.html)
 
+[最大似然、逻辑回归和随机梯度训练](http://cseweb.ucsd.edu/~elkan/250B/logreg.pdf)
+
 #### 梯度下降法
 
 #### 牛顿法
@@ -30,6 +32,7 @@ tags: []
 #### 拟牛顿法
 
 #### 共轭梯度法
+
 
 ### 有约束最优化
 
@@ -43,6 +46,10 @@ tags: []
 
 可以看出，这是一个有约束的问题，那么就可以用到"拉普拉斯+KKT+对偶"来求解了。
 
+### 最优化算法的并行化
+
+- [Distributed LIBLINEAR](http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/distributed-liblinear/)
+- [Large scale learning spotlights](http://nips.cc/Conferences/2014/Program/event.php?ID=4831)
 
 ## Loss Function
 
