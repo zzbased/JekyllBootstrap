@@ -34,7 +34,7 @@ author: vincentyao@tencent.com
 
 	图1. "南京市长江大桥"语言模型得分
 
-- 由字构词的分词方法。可以理解为字的分类问题，也就是自然语言处理中的label sequence问题，通常做法里利用HMM，MAXENT，MEMM，CRF等预测文本串每个字的tag[62]，譬如B，E，I，S，这四个tag分别表示：beginning, inside, ending, single，也就是一个词的开始，中间，结束，以及单个字的词。 例如"南京市长江大桥"的标注结果可能为："南(B)京(I)市(E)长(B)江(E)大(B)桥(E)"
+- 由字构词的分词方法。可以理解为字的分类问题，也就是自然语言处理中的sequence labeling问题，通常做法里利用HMM，MAXENT，MEMM，CRF等预测文本串每个字的tag[62]，譬如B，E，I，S，这四个tag分别表示：beginning, ending, inside, single，也就是一个词的开始，结束，中间，以及单个字的词。 例如"南京市长江大桥"的标注结果可能为："南(B)京(I)市(E)长(B)江(E)大(B)桥(E)"
 
 	由于CRF既可以像最大熵模型一样加各种领域feature，又避免了HMM的齐次马尔科夫假设，所以基于CRF的分词目前是效果最好的，具体请参考文献[61,62,63]。
   
@@ -57,7 +57,7 @@ author: vincentyao@tencent.com
 
 最简单的语言模型是N-Gram，它利用马尔科夫假设，认为句子中每个单词只与其前n-1个单词有关，即假设产生\\(w_m\\)这个词的条件概率只依赖于前n-1个词，则有\\(P(w_m|w_1,w_2...w_{m-1}) = P(w_m|w_{m-n+1},w_{m-n+2} ... w_{m-1})\\)。其中n越大，模型可区别性越强，n越小，模型可靠性越高。
 
-N-Gram语言模型简单有效，但是它只考虑了词的位置关系，没有考虑词之间的相似度，词语法和词语义，并且还存在数据稀疏的问题，所以后来，又逐渐提出更多的语言模型，例如Class-based ngram model，topic-based ngram model，cache-based ngram model，skipping ngram model，指数语言模型（最大熵模型，条件随机域模型）等。若想了解更多请参考文章[18]。 
+N-Gram语言模型简单有效，但是它只考虑了词的位置关系，没有考虑词之间的相似度，词法和词语义，并且还存在数据稀疏的问题，所以后来，又逐渐提出更多的语言模型，例如Class-based ngram model，topic-based ngram model，cache-based ngram model，skipping ngram model，指数语言模型（最大熵模型，条件随机域模型）等。若想了解更多请参考文章[18]。 
 
 最近，随着深度学习的兴起，神经网络语言模型也变得火热[4]。用神经网络训练语言模型的经典之作，要数Bengio等人发表的《A Neural Probabilistic Language Model》[3]，它也是基于n-gram的，首先将每个单词\\(w_{m-n+1},w_{m-n+2} ... w_{m-1}\\)映射到词向量空间，再把各个单词的词向量组合成一个更大的向量作为神经网络输入，输出是\\(P(w_m)\\)。本文将此模型简称为ffnnlm（Feed-forward Neural Net Language Model）。ffnnlm解决了传统n-gram的两个缺陷：(1)词语之间的相似性可以通过词向量来体现；(2)自带平滑功能。文献[3]不仅提出神经网络语言模型，还顺带引出了词向量，关于词向量，后文将再细述。
 
@@ -327,13 +327,17 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 ##### 卷积神经网络在文本上的应用
 卷积神经网络在image classify和image detect上得到诸多成功的应用，后文将再详细阐述。但除了图片外，它在文本分析上也取得一些成功的应用。
 
-- 将cnn作为文本分类器使用[36]。如下图所示，该cnn很简单，共分四层，第一层是词向量层，doc中的每个词，都将其映射到词向量空间，假设词向量为k维，则n个词映射后，相当于生成一张n*k维的图像；第二层是卷积层，多个滤波器作用于词向量层，不同滤波器生成不同的feature map；第三层是pooling层，取每个feature map的最大值，这样操作可以处理变长文档，因为第三层输出只依赖于滤波器的个数；第四层是一个全连接的softmax层，输出是每个类目的概率。除此之外，输入层可以有两个channel，其中一个channel采用预先利用word2vec训练好的词向量，另一个channel的词向量可以通过backpropagation在训练过程中调整。这样做的结果是：在目前通用的7个分类评测任务中，有4个取得了state-of-the-art的结果，另外3个表现接近最好水平。
+基于CNN，可以用来做文本分类，情感分析，本体分类等[36,41,84]。传统文本分类等任务，一般基于bag of words或者基于word的特征提取，此类方法一般需要领域知识和人工特征。利用CNN做，方法也类似，但一般都是基于raw text，CNN模型的输入可以是word series，可以是word vector，还可以是单纯的字符。比起传统方法，CNN不需要过多的人工特征。
+
+- 将word series作为输入，利用CNN做文本分类。如下图所示[36]，该CNN很简单，共分四层，第一层是词向量层，doc中的每个词，都将其映射到词向量空间，假设词向量为k维，则n个词映射后，相当于生成一张n*k维的图像；第二层是卷积层，多个滤波器作用于词向量层，不同滤波器生成不同的feature map；第三层是pooling层，取每个feature map的最大值，这样操作可以处理变长文档，因为第三层输出只依赖于滤波器的个数；第四层是一个全连接的softmax层，输出是每个类目的概率。除此之外，输入层可以有两个channel，其中一个channel采用预先利用word2vec训练好的词向量，另一个channel的词向量可以通过backpropagation在训练过程中调整。这样做的结果是：在目前通用的7个分类评测任务中，有4个取得了state-of-the-art的结果，另外3个表现接近最好水平。
 
 	![](https://raw.githubusercontent.com/zzbased/zzbased.github.com/master/_posts/images/cnn_text_classify.png)	
 	
 	图20.基于CNN的文本分类
 
-- 利用cnn做文本分类，还可以考虑到词的顺序。利用传统的"bag-of-words + maxent/svm"方法，是没有考虑词之间的顺序的。文献[41]中提出两种cnn模型：seq-cnn, bow-cnn，利用这两种cnn模型，均取得state-of-the-art结果。
+	利用cnn做文本分类，还可以考虑到词的顺序。利用传统的"bag-of-words + maxent/svm"方法，是没有考虑词之间的顺序的。文献[41]中提出两种cnn模型：seq-cnn, bow-cnn，利用这两种cnn模型，均取得state-of-the-art结果。
+
+- 将doc character作为输入，利用CNN做文本分类。文献[86]介绍了一种方法，不利用word，也不利用word vector，直接将字符系列作为模型输入，这样输入维度大大下降(相比于word)，有利于训练更复杂的卷积网络。对于中文，可以将汉字的拼音系列作为输入。
 
 #### 2.4 文本分类
 文本分类应该是最常见的文本语义分析任务了。首先它是简单的，几乎每一个接触过nlp的同学都做过文本分类，但它又是复杂的，对一个类目标签达几百个的文本分类任务，90%以上的准确率召回率依旧是一个很困难的事情。这里说的文本分类，指的是泛文本分类，包括query分类，广告分类，page分类，用户分类等，因为即使是用户分类，实际上也是对用户所属的文本标签，用户访问的文本网页做分类。
@@ -576,17 +580,18 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 	- 用户-广告的语义特征。分别提取用户和广告的语义特征，用于计算用户-广告的relevance，pctr，pcvr，达到精确排序。
 
 #### 4.2 Future
-最近几年提出很多基于深度学习的语义分析方法，上面只是介绍了几个点。还有更多方法需要我们去发掘：
+对于文本和图片的语义分析，可以看到：最近几年，在某些任务上，基于深度学习的方法逐渐赶上并超过了传统方法的效果。但目前为止，对于深度学习的发掘才刚刚开始，比较惊艳的神经网络方法，也只有有限几种，譬如CNN，RNN，RBM等。
+
+上文只是介绍了我们在工作中实践过的几个小点，还有更多方法需要我们去挖掘：
 
 - Video。Learn about 3D structure from motion。如文献[19]所示，研究将视频也转换到自然语言。
 - Deep Learning + Structured Prediction，用于syntactic representation。
-- **TODO**
 
 #### 4.3 总结
 
 上文主要从文本、图片这两方面讲述了语义分析的一些方法，并结合个人经验做了一点总结。
 
-原本想写得更全面一些，但写的时候才发现自上面所述的只是沧海一粟，后面还有更多语义分析的内容之后再更新。另外为避免看到大篇理论就头痛，文中尽可能不出现复杂的公式和理论推导。如果有兴趣，可以进一步阅读参考文献，获得更深的理解。谢谢。
+原本想写得更全面一些，但写的时候才发现上面所述的只是沧海一粟，后面还有更多语义分析的内容之后再更新。另外为避免看到大篇理论就头痛，文中尽可能不出现复杂的公式和理论推导。如果有兴趣，可以进一步阅读参考文献，获得更深的理解。谢谢。
 
 ### 5 参考文献
 
@@ -673,4 +678,5 @@ f(x,y)是图像上点(x,y)的灰度值，w(x,y)则是卷积核，也叫滤波器
 81. [Hao Fang et. From Captions to Visual Concepts and Back](http://arxiv.org/pdf/1411.4952v2)
 82. [Modeling Documents with a Deep Boltzmann Machine](http://www.cs.toronto.edu/~nitish/uai13.pdf)
 83. [A Deep Dive into Recurrent Neural Nets](http://nikhilbuduma.com/2015/01/11/a-deep-dive-into-recurrent-neural-networks/)
+84. [Xiang zhang et. Text Understanding from Scratch](http://arxiv.org/abs/1502.01710?utm_source=dlvr.it&utm_medium=tumblr)
 
