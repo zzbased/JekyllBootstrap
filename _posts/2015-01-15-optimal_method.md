@@ -46,6 +46,7 @@ tags: []
 可以看出，这是一个有约束的问题，那么就可以用到"拉普拉斯+KKT+对偶"来求解了。
 
 ## 最优化算法的并行化
+
 ### Logistic Regression
 
 这里主要以Logistic regression为例，讲一讲最优化算法的并行化实现。
